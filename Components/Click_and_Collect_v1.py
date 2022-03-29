@@ -1,6 +1,6 @@
 #Bug - accepts blank input
 
-print("Please enter the pickup information")
+print("Please enter the click and collect information")
 
 #customer name
 name = input("Please enter you name")

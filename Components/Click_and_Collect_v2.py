@@ -2,7 +2,7 @@
 
 
 
-print("Please enter the pickup information")
+print("Please enter Click and Collect information")
 
 #customer name
 valid = False
