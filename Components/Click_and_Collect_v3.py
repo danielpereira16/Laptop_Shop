@@ -2,7 +2,7 @@
 customer_details = {}
 
 # Basic instructions
-print("Please enter the pickup information")
+print("Please enter the Click and Collect information")
 
 #customer name not blank
 valid = False
