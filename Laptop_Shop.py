@@ -1,4 +1,4 @@
-#Laptop Shop Bot
+# Laptop Shop Bot
 # 26.03.22
 # Bugs - Phone Number allows letters
 #      - Name allows numbers
@@ -31,25 +31,26 @@ def welcome():
     '''
     num = randint(0,9)
     name = (names[num])
-    print("*** Welcome to my Laptop Shopa ***")
+    print("*** Welcome to my Laptop Shop ***")
     print("*** my name is ",name, "***")
     print("*** I will be here to help you order the right and perfect laptop for you ***")
 
 # Menu for Pickup and Delivery
 def order_type():
-    print ("Do you want your order delivered or are you picking it up")
-    print ("For pickup please enter 1") 
+    print ("Is your order for Click and Collect or delivery")
+    print ("For Click and Collect please enter 1") 
     print ("For delivery please enter 2")
     while True:
         try:
             delivery = int(input("Please enter a number "))
             if delivery >= 1 and delivery <= 2:
                 if delivery == 1:
-                    print ("Pickup")
-                    pickup()
+                    print ("Click and Collect")
+                    Click_and_Collect_info()
                     break
                 elif delivery == 2:
                     print ("Delivery")
+                    delivery_info()
                     break
             else:
                 print("Number must be 1 or 2")
@@ -60,7 +61,7 @@ def order_type():
 
 
 # Pickup information - Name and Phone
-def pickup():
+def Click_and_Collect_info():
     question = ("Please enter your name ")
     customer_details['name'] = not_blank(question )
     #print(customer_details['name'])
@@ -73,8 +74,27 @@ def pickup():
 
 
 # Delivery information - Name, Address and Phone
+def delivery_info():
+    question = ("Please enter your name ")
+    customer_details['name'] = not_blank(question )
+    print(customer_details['name'])
 
+    question = ("Please enter your phone number ")
+    customer_details['phone'] = not_blank(question)
+    print(customer_details['phone'])
 
+    question = ("Please enter your house number ")
+    customer_details['house'] = not_blank(question)
+    print(customer_details['house'])
+
+    question = ("Please enter your street name ")
+    customer_details['street'] = not_blank(question)
+    print(customer_details['street'])
+
+    question = ("Please enter your suburb ")
+    customer_details['suburb'] = not_blank(question)
+    print(customer_details['suburb'])
+    print(customer_details)
 
 
 # Choose total number of items
@@ -117,7 +137,6 @@ def main():
     '''
     welcome()
     order_type()
-    pickup()
-
+    
 
 main()
