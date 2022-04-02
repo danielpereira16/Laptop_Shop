@@ -13,9 +13,9 @@ def welcome():
     '''
     num = randint(0,9)
     name = (names[num])
-    print("*** Welcome to Dream Pizza ***")
+    print("*** Welcome to my Laptop Shop ***")
     print("*** my name is ",name, "***")
-    print("*** I will be here to help you order your delicious Dream Pizza ***")
+    print("*** I will be here to help you order the right and perfect laptop for you ***")
 
 
 def main():
