@@ -20,7 +20,7 @@ order_cost = []
 
 
 def menu():
-    number_laptops = 12
+    number_laptops = 18
 
     for count in range (number_laptops):
         print("{} {} ${:.2f}"   .format(count+1,laptop_names[count],laptop_prices[count]))
