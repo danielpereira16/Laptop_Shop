@@ -39,8 +39,10 @@ print("Please choose your laptops by entering the number from the menu")
 for item in range(num_laptops):
     while num_laptops > 0:
         laptop_ordered = int(input())
+        laptop_ordered = laptop_ordered-1
         order_list.append(laptop_names[laptop_ordered])
-        order_cost.append(laptop_prices[laptop_ordered])    
+        order_cost.append(laptop_prices[laptop_ordered])
+        print("{} ${:.2f}" .format(laptop_names[laptop_ordered],laptop_prices[laptop_ordered]))    
         num_laptops = num_laptops-1
 
 print(order_list)
