@@ -5,6 +5,11 @@ order_list = ['Asus 14" Laptop - Intel Celeron 4GB-RAM 128GB','Asus 15.6" Laptop
 #list to store pizza prices
 order_cost = [688, 1884, 1994, 2149, 2549, 1584]
 
+cust_details = {'Name':'Mark', 'Phone':'0214635678', 'House':'34', 'Street':'Dragon', 'Surburb':'Flat Bush'}
+
+#print("\n",cust_details['Name'], "\n",cust_details['Phone'], "\n",cust_details['House'], "\n",cust_details['Street'], "\n",cust_details['Surburb'])
+
+print("Customer Name: {} Customer Phone:\n{} Customer House:\n{} Customer Street:\n{} Customer Surburb:\n{}" .format(cust_details['Name'],cust_details['Phone'],cust_details['House'],cust_details['Street'],cust_details['Surburb']))
 
 count = 0
 for item in order_list:
