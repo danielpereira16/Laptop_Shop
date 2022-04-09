@@ -56,19 +56,22 @@ def welcome():
 
 # Menu for Pickup and Delivery
 def order_type():
+    del_pick = ""
     print ("Is your order for Click and Collect or delivery")
     print ("For Click and Collect please enter 1") 
-    print ("For delivery please enter 2")
+    print ("For Delivery please enter 2")
     while True:
         try:
             delivery = int(input("Please enter a number "))
             if delivery >= 1 and delivery <= 2:
                 if delivery == 1:
                     print ("Click and Collect")
+                    del_pick = "Click and Collect"
                     Click_and_Collect_info()
                     break
                 elif delivery == 2:
                     print ("Delivery")
+                    del_pick = "Delivery"
                     delivery_info()
                     break
             else:
@@ -76,6 +79,7 @@ def order_type():
         except ValueError:
             print ("That was not a valid input")
             print ("Please enter 1 or 2 ")
+    return del_pick
 
 # Pickup information - Name and Phone
 def Click_and_Collect_info():
@@ -154,9 +158,25 @@ def order_laptops():
             num_laptops = num_laptops-1
 
 # Print order out - including if the order is pickup or delivery and names and prices of each item - total cost including any delivery charge
-
-
-
+def print_order(del_pick):
+    print()
+    total_cost = sum(order_cost)
+    print("Customer Details")
+    if del_pick == "Click and Collect":
+        print("Your order is for Click and Collect")
+        print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']}")
+    elif del_pick == "Delivery":
+        print("Your order is for Delivery")
+        print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']} \nCustomer Address: {customer_details['house']} {customer_details['street']} {customer_details['suburb']}")
+    print()
+    print("Order Details")
+    count = 0
+    for item in order_list:
+        print("Ordered: {} Cost ${:.2f}".format(item, order_cost[count]))
+        count = count+1
+    print()
+    print("Order Cost Details")
+    print(f"${total_cost:.2f}")
 
 # Ability to cancel or proceed with order
 
@@ -177,8 +197,9 @@ def main():
     Returns: None
     '''
     welcome()
-    order_type()
+    del_pick = order_type()
     list()
     order_laptops()
+    print_order(del_pick)
 
 main()
