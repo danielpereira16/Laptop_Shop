@@ -175,7 +175,13 @@ def print_order(del_pick):
         print("Ordered: {} Cost ${:.2f}".format(item, order_cost[count]))
         count = count+1
     print()
-    print("Order Cost Details")
+    if del_pick == "Delivery":
+        if len(order_list) >= 5:
+            print("Your order will be Delivered to you for free")
+        elif len(order_list) < 5:
+            print("Due to the fact that you have ordered less than 5 items, there is a $9.00 surcharge for delivery")
+            total_cost = total_cost + 9
+    print("Total Order Cost")
     print(f"${total_cost:.2f}")
 
 # Ability to cancel or proceed with order
