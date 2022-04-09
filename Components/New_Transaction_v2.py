@@ -8,6 +8,9 @@ order_cost = []
 # Customer details dictionary
 customer_details = {}
 
+def main():
+    print("Start Again")
+
 print ("Do you want to start another Order or Exit?")
 print ("To start another order enter 1") 
 print ("To exit the bot enter 2")
@@ -33,5 +36,3 @@ while True:
         print ("That was not a valid input")
         print ("Please enter 1 or 2 ")
 
-def main():
-    print("Start Again")
