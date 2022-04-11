@@ -138,8 +138,8 @@ def order_laptops():
     # ask for total number of laptops for order
     print("Please note that due to covid," 
           "there has been delays in shipping and" 
-          "therefore you can only order a maximum" 
-          "of 20 Laptops per order")
+          " therefore you can only order a maximum" 
+          " of 20 Laptops per order")
     num_laptops = 0
     LOW = 1 
     HIGH = 20
@@ -152,7 +152,7 @@ def order_laptops():
     for item in range(num_laptops):
         while num_laptops > 0:
                 print ("Please choose your laptops" 
-                       "by entering the number from the list ")
+                       " by entering the number from the list ")
                 question = (f"Enter a number between {MENU_LOW} and {MENU_HIGH} ")
                 laptops_ordered = val_int(MENU_LOW,MENU_HIGH,question)
                 laptops_ordered = laptops_ordered -1
