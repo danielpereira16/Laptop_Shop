@@ -8,4 +8,5 @@ def check_string(question):
             return response.title()
 
 question = "Please enter your name "
-name = check_string(question)            
+name = check_string(question)
+print(name)      
