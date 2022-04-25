@@ -7,8 +7,13 @@ import sys
 import random
 from random import randint
 
+#Constants
+LOW = 1 
+HIGH = 2
+
 #List of random names
 names = ["Caleb", "Shawn", "Sean", "Gian", "Jayden", "Ryan", "Daniel", "Danett", "Hannah", "Teresa" ]
+
 #List of laptop names
 laptop_names = ['Asus 14" Laptop - Intel Celeron 4GB-RAM 128GB','Asus 15.6" Laptop - Intel Core i7 16GB-RAM 512GB-SSD',
 'Asus TUF 15.6" Gaming Laptop - Intel Core i5 8GB-RAM 512GB-SSD','Apple MacBook Air 13" with M1 Chip 512GB',
@@ -20,6 +25,7 @@ laptop_names = ['Asus 14" Laptop - Intel Celeron 4GB-RAM 128GB','Asus 15.6" Lapt
 'Microsoft Surface Laptop 4 13.5" - Intel i5 16GB-RAM 512GB-SSD','Microsoft Surface Laptop Studio 14.4" - Intel i5 16GB-RAM 256GB-SSD',
 'Lenovo IdeaPad 3 15.6" Laptop - Intel Pentium Silver 8GB-RAM 128GB-SSD','Lenovo Yoga 7i 14" 2-in-1 Laptop - Intel Core i5 16GB-RAM 512GB-SSD',
 'Lenovo IdeaPad Flex 5 14" 2-in-1 Laptop - AMD Ryzen5 16GB-RAM 512GB-SSD']
+
 #List of laptop prices
 laptop_prices = [688,1884,1994,2149,2549,1584,1994,3997,3128,1698,836,1298,2499,2549,2699,994,2388,1984]
 
@@ -40,6 +46,16 @@ def not_blank(question):
             return response.title()
         else:
             print("This cannot be blank")
+
+# validates string inputs to check if they are alphabetical
+def check_string(question):
+    while True:
+        response = input(question)
+        x = response.isalpha()
+        if x == False:
+            print("Input must only contain letters")
+        else: 
+            return response.title()
 
 # validates inputs to check if they an integer
 def val_int(low,high,question):
@@ -71,8 +87,6 @@ def welcome():
 # Menu for Pickup and Delivery
 def order_type():
     del_pick = ""
-    LOW = 1 
-    HIGH = 2
     question = (f"Enter a number between {LOW} and {HIGH} ")
     print ("Is your order for Click and Collect or delivery")
     print ("For Click and Collect please enter 1") 
@@ -93,7 +107,7 @@ def order_type():
 # Pickup information - Name and Phone
 def Click_and_Collect_info():
     question = ("Please enter your name ")
-    customer_details['name'] = not_blank(question )
+    customer_details['name'] = check_string(question)
     print(customer_details['name'])
 
     question = ("Please enter your phone number ")
@@ -105,7 +119,7 @@ def Click_and_Collect_info():
 # Delivery information - Name, Address and Phone
 def delivery_info():
     question = ("Please enter your name ")
-    customer_details['name'] = not_blank(question )
+    customer_details['name'] = check_string(question)
     print(customer_details['name'])
 
     question = ("Please enter your phone number ")
@@ -117,20 +131,22 @@ def delivery_info():
     print(customer_details['house'])
 
     question = ("Please enter your street name ")
-    customer_details['street'] = not_blank(question)
+    customer_details['street'] = check_string(question)
     print(customer_details['street'])
 
     question = ("Please enter your suburb ")
-    customer_details['suburb'] = not_blank(question)
+    customer_details['suburb'] = check_string(question)
     print(customer_details['suburb'])
     print(customer_details)
     print()
+
 # Item List
 def list():
     number_laptops = 18
 
     for count in range (number_laptops):
         print("{} {} ${:.2f}"   .format(count+1,laptop_names[count],laptop_prices[count]))
+    print()
 
 # Choose total number of items - max 20
 # Item(s) ordered - from item list - print each ordered item with cost
@@ -141,20 +157,20 @@ def order_laptops():
           " therefore you can only order a maximum" 
           " of 20 Laptops per order")
     num_laptops = 0
-    LOW = 1 
-    HIGH = 20
-    MENU_LOW = 1
-    MENU_HIGH = 18
-    question = (f"Enter a number between {LOW} and {HIGH} ")
+    NUM_LOW = 1 
+    NUM_HIGH = 20
+    LIST_LOW = 1
+    LIST_HIGH = 18
+    question = (f"Enter a number between {NUM_LOW} and {NUM_HIGH} ")
     print ("How many Laptops would you to purchase? ")
-    num_laptops = val_int(LOW,HIGH,question)
+    num_laptops = val_int(NUM_LOW,NUM_HIGH,question)
     # Choose laptops from the list
     for item in range(num_laptops):
         while num_laptops > 0:
                 print ("Please choose your laptops" 
                        " by entering the number from the list ")
-                question = (f"Enter a number between {MENU_LOW} and {MENU_HIGH} ")
-                laptops_ordered = val_int(MENU_LOW,MENU_HIGH,question)
+                question = (f"Enter a number between {LIST_LOW} and {LIST_HIGH} ")
+                laptops_ordered = val_int(LIST_LOW,LIST_HIGH,question)
                 laptops_ordered = laptops_ordered -1
                 order_list.append(laptop_names[laptops_ordered])
                 order_cost.append(laptop_prices[laptops_ordered])    
@@ -195,8 +211,6 @@ def print_order(del_pick):
 
 # Ability to cancel or proceed with order
 def confirm_cancel():
-    LOW = 1 
-    HIGH = 2
     question = (f"Enter a number between {LOW} and {HIGH} ")
     print ("Please Confirm Your Order")
     print ("To Confirm please enter 1") 
@@ -218,8 +232,6 @@ def confirm_cancel():
 
 # Option for new order or to exit
 def new_exit():
-    LOW = 1 
-    HIGH = 2
     question = (f"Enter a number between {LOW} and {HIGH} ")
     print ("Do you want to start another Order or Exit?")
     print ("To start another order enter 1") 
