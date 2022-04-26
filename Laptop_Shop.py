@@ -10,6 +10,9 @@ from random import randint
 #Constants
 LOW = 1 
 HIGH = 2
+PH_LOW = 7
+PH_HIGH = 10
+
 
 #List of random names
 names = ["Caleb", "Shawn", "Sean", "Gian", "Jayden", "Ryan", "Daniel", "Danett", "Hannah", "Teresa" ]
@@ -70,6 +73,23 @@ def val_int(low,high,question):
             print ("That is not a valid number")
             print(f"Please enter a number between {low} and {high} ")
 
+# Validates phone number to check if it is between 7 to 10 digits
+def check_phone(question, PH_LOW, PH_HIGH):
+    while True:
+        try:
+            num = int(input(question))
+            test_num = num
+            count = 0
+            while test_num > 0:
+                test_num = test_num//10
+                count = count + 1
+            if count >= PH_LOW and count <= PH_HIGH:
+                return num
+            else:
+                print("NZ phone numbers have between 7 and 10 digits")
+        except ValueError:
+            print("Please enter a number")
+
 # Welcome message with random name
 def welcome():
     '''
@@ -111,7 +131,7 @@ def Click_and_Collect_info():
     print(customer_details['name'])
 
     question = ("Please enter your phone number ")
-    customer_details['phone'] = not_blank(question)
+    customer_details['phone'] = check_phone(question, PH_LOW, PH_HIGH)
     print(customer_details['phone'])
     print(customer_details)
     print()
@@ -123,7 +143,7 @@ def delivery_info():
     print(customer_details['name'])
 
     question = ("Please enter your phone number ")
-    customer_details['phone'] = not_blank(question)
+    customer_details['phone'] = check_phone(question, PH_LOW, PH_HIGH)
     print(customer_details['phone'])
 
     question = ("Please enter your house number ")
