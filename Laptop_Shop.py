@@ -12,6 +12,8 @@ LOW = 1
 HIGH = 2
 PH_LOW = 7
 PH_HIGH = 10
+HOUSE_LOW = 1
+HOUSE_HIGH = 3500
 
 
 #List of random names
@@ -88,7 +90,21 @@ def check_phone(question, PH_LOW, PH_HIGH):
             else:
                 print("NZ phone numbers have between 7 and 10 digits")
         except ValueError:
-            print("Please enter a number")
+            print ("That is not a valid number")
+            print("Please enter a number ")
+
+# validates house number to check if it is an integer and if it is between 1 to 3500 as 3500 is just above the highest address number in NZ
+def check_house_number(question, HOUSE_LOW, HOUSE_HIGH):
+    while True: 
+        try:
+            num = int(input(question))
+            if num >= HOUSE_LOW and num <= HOUSE_HIGH: 
+                return num
+            else:
+                    print(f"Please enter a number between {HOUSE_LOW} and {HOUSE_HIGH} ")
+        except ValueError: 
+            print ("That is not a valid number")
+            print(f"Please enter a number between {HOUSE_LOW} and {HOUSE_HIGH} ")
 
 # Welcome message with random name
 def welcome():
@@ -103,12 +119,15 @@ def welcome():
     print("*** Welcome to my Laptop Shop ***")
     print("*** my name is ",name, "***")
     print("*** I will be here to help you order the right and perfect laptop for you ***")
+    print()
 
 # Menu for Pickup and Delivery
 def order_type():
     del_pick = ""
-    question = (f"Enter a number between {LOW} and {HIGH} ")
+    question = (f"Enter a number between {LOW} and {HIGH}" "\n")
     print ("Is your order for Click and Collect or delivery")
+    print ("Please note that a $9.00 delivery fee will be added if you have chosen less " 
+           "than 5 items")
     print ("For Click and Collect please enter 1") 
     print ("For Delivery please enter 2")
     delivery = val_int(LOW,HIGH,question)
@@ -146,18 +165,33 @@ def delivery_info():
     customer_details['phone'] = check_phone(question, PH_LOW, PH_HIGH)
     print(customer_details['phone'])
 
-    question = ("Please enter your house number ")
-    customer_details['house'] = not_blank(question)
+    question = ("Please enter your house number without any sub-address number or letter, e.g 12 not 12a. "
+                "You can inform us about your sub-address and any other information " 
+                "regaring the delivery in the special instructions section ")
+    customer_details['house'] = check_house_number(question, HOUSE_LOW, HOUSE_HIGH)
     print(customer_details['house'])
 
-    question = ("Please enter your street name ")
-    customer_details['street'] = check_string(question)
-    print(customer_details['street'])
+    question = ("Please enter your street name without the street suffix ")
+    customer_details['street name'] = check_string(question)
+    print(customer_details['street name'])
+
+    question = ("Please enter your street suffix, e.g cresent ")
+    customer_details['street suffix'] = check_string(question)
+    print(customer_details['street suffix'])
 
     question = ("Please enter your suburb ")
     customer_details['suburb'] = check_string(question)
     print(customer_details['suburb'])
     print(customer_details)
+    print()
+
+    special_instructions()
+
+def special_instructions():
+    print()
+    special = input("Do you have any special instructions such as your sub-address number e.g 12a or 1/10" 
+                    " or any other information we need to know when delivering the package such as time or location? \n").upper()
+    customer_details['special'] = special
     print()
 
 # Item List
@@ -181,20 +215,23 @@ def order_laptops():
     NUM_HIGH = 20
     LIST_LOW = 1
     LIST_HIGH = 18
-    question = (f"Enter a number between {NUM_LOW} and {NUM_HIGH} ")
+    question = (f"Please enter the number of laptops you would like to purchase. " 
+                f"The number must be between {NUM_LOW} and {NUM_HIGH}" "\n")
     num_laptops = val_int(NUM_LOW,NUM_HIGH,question)
+    print()
     # Choose laptops from the list
     for item in range(num_laptops):
         while num_laptops > 0:
                 print ("Please choose your laptops" 
                        " by entering the number from the list ")
-                question = (f"Enter a number between {LIST_LOW} and {LIST_HIGH} ")
+                question = (f"Enter a number between {LIST_LOW} and {LIST_HIGH}" "\n")
                 laptops_ordered = val_int(LIST_LOW,LIST_HIGH,question)
                 laptops_ordered = laptops_ordered -1
                 order_list.append(laptop_names[laptops_ordered])
                 order_cost.append(laptop_prices[laptops_ordered])    
                 print("{} ${:.2f}" .format(laptop_names[laptops_ordered],
                                            laptop_prices[laptops_ordered]))
+                print()
                 num_laptops = num_laptops-1
 
 # Print order out - including if the order is pickup or delivery and names and prices of each item - total cost including any delivery charge
@@ -208,8 +245,9 @@ def print_order(del_pick):
     elif del_pick == "Delivery":
         print("Your order is for Delivery")
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']} "
-              f" \nCustomer Address: {customer_details['house']} {customer_details['street']}"
-              f" {customer_details['suburb']}")
+              f" \nCustomer Address: {customer_details['house']} {customer_details['street name']}"
+              f" {customer_details['street suffix']} {customer_details['suburb']}")
+        print("Special instructions: {}".format(customer_details['special']))
     print()
     print("Order Details")
     count = 0
@@ -221,8 +259,8 @@ def print_order(del_pick):
         if len(order_list) >= 5:
             print("Your order will be Delivered to you for free")
         elif len(order_list) < 5:
-            print("Due to the fact that you have ordered less than 5 items," 
-                  "there is a $9.00 surcharge for delivery")
+            print("Just a reminder, due to the fact that you have ordered less than 5 items," 
+                  "there is a $9.00 fee for delivery")
             total_cost = total_cost + 9
     print("Total Order Cost")
     print(f"${total_cost:.2f}")
@@ -230,12 +268,13 @@ def print_order(del_pick):
 
 # Ability to cancel or proceed with order
 def confirm_cancel():
-    question = (f"Enter a number between {LOW} and {HIGH} ")
+    question = (f"Enter a number between {LOW} and {HIGH} ""\n")
     print ("Please Confirm Your Order")
     print ("To Confirm please enter 1") 
     print ("To Cancel please enter 2")
 
     confirm = val_int(LOW,HIGH,question)
+    print()
     if confirm == 1:
         print ("Order Confirmed")
         print ("Your order will be sent to our Store")
@@ -251,11 +290,12 @@ def confirm_cancel():
 
 # Option for new order or to exit
 def new_exit():
-    question = (f"Enter a number between {LOW} and {HIGH} ")
+    question = (f"Enter a number between {LOW} and {HIGH} ""\n")
     print ("Do you want to start another Order or Exit?")
     print ("To start another order enter 1") 
     print ("To exit the bot enter 2")
     confirm = val_int(LOW,HIGH,question)
+    print()
     if confirm == 1:
         print ("New Order")
         print()
