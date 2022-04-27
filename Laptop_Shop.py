@@ -182,7 +182,6 @@ def order_laptops():
     LIST_LOW = 1
     LIST_HIGH = 18
     question = (f"Enter a number between {NUM_LOW} and {NUM_HIGH} ")
-    print ("How many Laptops would you to purchase? ")
     num_laptops = val_int(NUM_LOW,NUM_HIGH,question)
     # Choose laptops from the list
     for item in range(num_laptops):
