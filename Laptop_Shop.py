@@ -3,26 +3,26 @@
 # Bugs - Phone Number allows letters
 #      - Name allows numbers
 
-import sys
-import random
-from random import randint
+import sys 
+import random 
+from random import randint 
 
-#Constants
+#Constants 
 LOW = 1 
-HIGH = 2
-PH_LOW = 7
-PH_HIGH = 10
-HOUSE_LOW = 1
-HOUSE_HIGH = 3500
+HIGH = 2 
+PH_LOW = 7 
+PH_HIGH = 10 
+HOUSE_LOW = 1 
+HOUSE_HIGH = 3500 
 
 
-#List of random names
+#List of random names  
 names = ["Caleb", "Shawn", "Sean", "Gian", "Jayden", "Ryan", "Daniel", "Danett", "Hannah", "Teresa" ]
 
 #List of laptop names
-laptop_names = ['Asus 14" Laptop - Intel Celeron 4GB-RAM 128GB','Asus 15.6" Laptop - Intel Core i7 16GB-RAM 512GB-SSD',
-'Asus TUF 15.6" Gaming Laptop - Intel Core i5 8GB-RAM 512GB-SSD','Apple MacBook Air 13" with M1 Chip 512GB',
-'Apple MacBook Pro 13" with M1 Chip 512GB','HP 15.6" Laptop - Intel Core i5 8GB-RAM 256GB-SSD',
+laptop_names = ['Asus 14" Laptop - Intel Celeron 4GB-RAM 128GB-SSD','Asus 15.6" Laptop - Intel Core i7 16GB-RAM 512GB-SSD',
+'Asus TUF 15.6" Gaming Laptop - Intel Core i5 8GB-RAM 512GB-SSD','Apple MacBook Air 13" with M1 Chip 512GB-SSD',
+'Apple MacBook Pro 13" with M1 Chip 512GB-SSD','HP 15.6" Laptop - Intel Core i5 8GB-RAM 256GB-SSD',
 'HP Pavilion 15.6" Laptop - AMD Ryzen5 16GB-RAM 512GB-SSD','HP Spectre x360 13.5" 2-in-1 Laptop - Intel Core i7 16GB-RAM 512GB-SSD',
 'HP Envy x360 15.6" 2-in-1 Laptop - AMD Ryzen5 16GB-RAM 512GB-SSD','Acer Swift 3 14" Laptop - Intel Core i5 8GB-RAM 512GB-SSD',
 'Acer TravelMate Spin B3 11.6" 2-in-1 Laptop with Pen - Intel Pentium 4GB-RAM 128GB-SSD',
@@ -42,23 +42,13 @@ order_cost = []
 # Customer details dictionary
 customer_details = {}
 
-# validates inputs to check if they are blank
-def not_blank(question):
-    valid = False
-    while not valid:
-        response = input(question)
-        if response != "":
-            return response.title()
-        else:
-            print("This cannot be blank")
-
 # validates string inputs to check if they are alphabetical
 def check_string(question):
     while True:
         response = input(question)
         x = response.isalpha()
         if x == False:
-            print("Input must only contain letters")
+            print("Input must only contain letters.")
         else: 
             return response.title()
 
@@ -70,10 +60,10 @@ def val_int(low,high,question):
             if num >= low and num <= high: 
                 return num
             else:
-                    print(f"Please enter a number between {low} and {high} ")
+                    print(f"Please enter a number between {low} and {high}.")
         except ValueError: 
-            print ("That is not a valid number")
-            print(f"Please enter a number between {low} and {high} ")
+            print ("That is not a valid number.")
+            print(f"Please enter a number between {low} and {high}.")
 
 # Validates phone number to check if it is between 7 to 10 digits
 def check_phone(question, PH_LOW, PH_HIGH):
@@ -90,8 +80,8 @@ def check_phone(question, PH_LOW, PH_HIGH):
             else:
                 print("NZ phone numbers have between 7 and 10 digits")
         except ValueError:
-            print ("That is not a valid number")
-            print("Please enter a number ")
+            print ("That is not a valid number.")
+            print("Please enter a number.")
 
 # validates house number to check if it is an integer and if it is between 1 to 3500 as 3500 is just above the highest address number in NZ
 def check_house_number(question, HOUSE_LOW, HOUSE_HIGH):
@@ -101,10 +91,10 @@ def check_house_number(question, HOUSE_LOW, HOUSE_HIGH):
             if num >= HOUSE_LOW and num <= HOUSE_HIGH: 
                 return num
             else:
-                    print(f"Please enter a number between {HOUSE_LOW} and {HOUSE_HIGH} ")
+                    print(f"Please enter a number between {HOUSE_LOW} and {HOUSE_HIGH}.")
         except ValueError: 
-            print ("That is not a valid number")
-            print(f"Please enter a number between {HOUSE_LOW} and {HOUSE_HIGH} ")
+            print ("That is not a valid number.")
+            print(f"Please enter a number between {HOUSE_LOW} and {HOUSE_HIGH}.")
 
 # Welcome message with random name
 def welcome():
@@ -116,20 +106,21 @@ def welcome():
     '''
     num = randint(0,9)
     name = (names[num])
+    print()
     print("*** Welcome to my Laptop Shop ***")
     print("*** my name is ",name, "***")
-    print("*** I will be here to help you order the right and perfect laptop for you ***")
+    print("*** I will be here to help you order the perfect laptop ***")
     print()
 
 # Menu for Pickup and Delivery
 def order_type():
     del_pick = ""
-    question = (f"Enter a number between {LOW} and {HIGH}" "\n")
-    print ("Is your order for Click and Collect or delivery")
+    question = (f"For Click and Collect please enter {LOW}." 
+                f"\nFor Delivery please enter {HIGH}." 
+                f"\nPlease enter the number of your selected choice: ")
+    print ("Is your order for Click and Collect or delivery.")
     print ("Please note that a $9.00 delivery fee will be added if you have chosen less " 
-           "than 5 items")
-    print ("For Click and Collect please enter 1") 
-    print ("For Delivery please enter 2")
+           "than 5 items.") 
     delivery = val_int(LOW,HIGH,question)
     if delivery == 1:
         print()
@@ -145,11 +136,11 @@ def order_type():
 
 # Pickup information - Name and Phone
 def Click_and_Collect_info():
-    question = ("Please enter your name ")
+    question = ("Please enter your name: ")
     customer_details['name'] = check_string(question)
     print(customer_details['name'])
 
-    question = ("Please enter your phone number ")
+    question = ("Please enter your phone number: ")
     customer_details['phone'] = check_phone(question, PH_LOW, PH_HIGH)
     print(customer_details['phone'])
     print(customer_details)
@@ -157,29 +148,27 @@ def Click_and_Collect_info():
 
 # Delivery information - Name, Address and Phone
 def delivery_info():
-    question = ("Please enter your name ")
+    question = ("Please enter your name: ")
     customer_details['name'] = check_string(question)
     print(customer_details['name'])
 
-    question = ("Please enter your phone number ")
+    question = ("Please enter your phone number: ")
     customer_details['phone'] = check_phone(question, PH_LOW, PH_HIGH)
     print(customer_details['phone'])
 
-    question = ("Please enter your house number without any sub-address number or letter, e.g 12 not 12a. "
-                "You can inform us about your sub-address and any other information " 
-                "regaring the delivery in the special instructions section ")
+    question = ("Please enter your house number without any sub-address number or letter, e.g 12 not 12a: ")
     customer_details['house'] = check_house_number(question, HOUSE_LOW, HOUSE_HIGH)
     print(customer_details['house'])
 
-    question = ("Please enter your street name without the street suffix ")
+    question = ("Please enter your street name without the street suffix: ")
     customer_details['street name'] = check_string(question)
     print(customer_details['street name'])
 
-    question = ("Please enter your street suffix, e.g cresent ")
+    question = ("Please enter your street suffix, e.g cresent: ")
     customer_details['street suffix'] = check_string(question)
     print(customer_details['street suffix'])
 
-    question = ("Please enter your suburb ")
+    question = ("Please enter your suburb: ")
     customer_details['suburb'] = check_string(question)
     print(customer_details['suburb'])
     print(customer_details)
@@ -189,15 +178,16 @@ def delivery_info():
 
 def special_instructions():
     print()
-    special = input("Do you have any special instructions such as your sub-address number e.g 12a or 1/10" 
-                    " or any other information we need to know when delivering the package such as time or location? \n").upper()
+    special = input(f"Do you have any special instructions we need to know?"
+                    f"\nThis could be your sub-address number e.g 12a or 1/10." 
+                    f"\nThis could also be any information we need to know when delivering the package such as time or location? \n").title()
     customer_details['special'] = special
     print()
 
 # Item List
 def list():
     number_laptops = 18
-
+    print("All Laptops are ordered by the brand of the laptop")
     for count in range (number_laptops):
         print("{} {} ${:.2f}"   .format(count+1,laptop_names[count],laptop_prices[count]))
     print()
@@ -215,16 +205,15 @@ def order_laptops():
     NUM_HIGH = 20
     LIST_LOW = 1
     LIST_HIGH = 18
-    question = (f"Please enter the number of laptops you would like to purchase. " 
-                f"The number must be between {NUM_LOW} and {NUM_HIGH}" "\n")
+    print("Please enter the number of laptops you would like to purchase.")
+    question = ( f"The number must be between {NUM_LOW} and {NUM_HIGH}: ")
     num_laptops = val_int(NUM_LOW,NUM_HIGH,question)
     print()
     # Choose laptops from the list
     for item in range(num_laptops):
         while num_laptops > 0:
-                print ("Please choose your laptops" 
-                       " by entering the number from the list ")
-                question = (f"Enter a number between {LIST_LOW} and {LIST_HIGH}" "\n")
+                print("Please choose your laptops by entering a number from the list above.")
+                question = (f"The number must be between {LIST_LOW} and {LIST_HIGH}: ")
                 laptops_ordered = val_int(LIST_LOW,LIST_HIGH,question)
                 laptops_ordered = laptops_ordered -1
                 order_list.append(laptop_names[laptops_ordered])
@@ -240,10 +229,10 @@ def print_order(del_pick):
     total_cost = sum(order_cost)
     print("Customer Details")
     if del_pick == "Click and Collect":
-        print("Your order is for Click and Collect")
+        print("Your order is for Click and Collect.")
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']}")
     elif del_pick == "Delivery":
-        print("Your order is for Delivery")
+        print("Your order is for Delivery.")
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']} "
               f" \nCustomer Address: {customer_details['house']} {customer_details['street name']}"
               f" {customer_details['street suffix']} {customer_details['suburb']}")
@@ -252,15 +241,15 @@ def print_order(del_pick):
     print("Order Details")
     count = 0
     for item in order_list:
-        print("Ordered: {} Cost ${:.2f}".format(item, order_cost[count]))
+        print("Ordered: {} Cost: ${:.2f}".format(item, order_cost[count]))
         count = count+1
     print()
     if del_pick == "Delivery":
         if len(order_list) >= 5:
-            print("Your order will be Delivered to you for free")
+            print("Your order will be Delivered to you for free.")
         elif len(order_list) < 5:
             print("Just a reminder, due to the fact that you have ordered less than 5 items," 
-                  "there is a $9.00 fee for delivery")
+                  "there is a $9.00 fee for delivery.")
             total_cost = total_cost + 9
     print("Total Order Cost")
     print(f"${total_cost:.2f}")
@@ -268,32 +257,32 @@ def print_order(del_pick):
 
 # Ability to cancel or proceed with order
 def confirm_cancel():
-    question = (f"Enter a number between {LOW} and {HIGH} ""\n")
+    question = (f"To Confirm please enter {LOW}."
+                f"\nTo Cancel please enter {HIGH}."
+                f"\nPlease enter the number of your selected choice: ")
     print ("Please Confirm Your Order")
-    print ("To Confirm please enter 1") 
-    print ("To Cancel please enter 2")
 
     confirm = val_int(LOW,HIGH,question)
     print()
     if confirm == 1:
         print ("Order Confirmed")
-        print ("Your order will be sent to our Store")
-        print ("It will be ready soon")
+        print ("Your order will be sent to our Store.")
+        print ("It will be ready soon.")
         print()
         new_exit()
 
     elif confirm == 2:
         print ("Order Cancelled")
-        print ("You can restart your order or exit the BOT")
+        print ("You can restart your order or exit the BOT.")
         print()
         new_exit()
 
 # Option for new order or to exit
 def new_exit():
-    question = (f"Enter a number between {LOW} and {HIGH} ""\n")
+    question = (f"To start another order please enter {LOW}."
+                f"\nTo exit the bot please enter {HIGH}."
+                f"\nPlease enter the number of your selected choice: ")
     print ("Do you want to start another Order or Exit?")
-    print ("To start another order enter 1") 
-    print ("To exit the bot enter 2")
     confirm = val_int(LOW,HIGH,question)
     print()
     if confirm == 1:
