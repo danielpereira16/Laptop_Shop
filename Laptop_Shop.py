@@ -177,7 +177,6 @@ def delivery_info():
     question = ("Please enter your suburb: ") #question asking for suburb
     customer_details['suburb'] = check_string(question) #customer street name will equal to check string which sends input through the function of check string
     print(customer_details['suburb']) #prints the customer suburb once answer is returned from the check string function
-    print(customer_details) #prints all information stored in the customer_details librar
     print() #prints blank space
 
     special_instructions()#opens and runs the function called special instructions
