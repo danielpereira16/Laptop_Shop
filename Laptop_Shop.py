@@ -99,8 +99,10 @@ customer_details = {}
 
 
 def check_string(question):
-    while True:  # sets up while true loop
-        response = input(question)  # asks for input(string)
+    while True:
+        # sets up while true loop
+        response = input(question)
+        # asks for input(string)
         x = response.isalpha()
         # checks that the input is in alphabetical
         # and sets x to True if alpha
