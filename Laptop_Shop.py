@@ -485,7 +485,7 @@ def order_laptops():
                 # - print statement informing customer to choose laptop
                 #   by entering number from the list above
                 question = (f"The number must be between {LIST_LOW}"
-                             "and {LIST_HIGH}: ")
+                            f" and {LIST_HIGH}: ")
                 # - Question which includes the numeric boundaries the
                 #   number must be in or equal to
                 laptops_ordered = val_int(LIST_LOW, LIST_HIGH, question)
