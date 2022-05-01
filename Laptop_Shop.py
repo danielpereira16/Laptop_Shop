@@ -538,7 +538,7 @@ def print_order(del_pick):
         # print statement stating that the order if for click and collect
         print(f"Customer Name: {customer_details['name']}"
               f"\nCustomer Phone: {customer_details['phone']}")
-        # - prints customers name and phone number formatted as
+        # - prints customers name and phone number formatted as e.g.
         #   Customer Name: Daniel and then below it Customer Phone: 09049950906
     elif del_pick == "Delivery":
         # - if del_pick was to equal delivery from the order_type
